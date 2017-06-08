@@ -1,0 +1,53 @@
+<!--
+  - Copyright (c) 2016 Financial Spectra
+  - All rights reserved.
+  - 
+  - Component Name - layoutOutputSection
+  -
+  - Developer(s)   - SSingh
+  -
+  -->
+<aura:component access="global">
+    <aura:attribute access="global" name="sectionTitle" type="String" required="false"
+                    description="User-defined title for the section"/>
+    <aura:attribute access="global" name="sectionFields" type="SectionField[]" required="false"
+                    description="List of fields to be displayed in the card"/>
+    <aura:attribute access="global" name="collapsible" type="Boolean" required="false" default="false"
+                    description="Whether the section is collapsible or not"/>
+
+    <div class="slds-container--fluid">
+        <div class="slds-section slds-is-open">
+            <h3 class="slds-section__title">
+                <button aria-controls="sectionBody" aria-expanded="true"
+                        class="slds-button slds-section__title-action"
+                        onclick="{!c.toggleDisplay}">
+                    <aura:if isTrue="{!v.collapsible}">
+                        <lightning:icon aura:id="titleIconDown" iconName="utility:chevrondown" size="xx-small"
+                                        class=""/>
+                        <lightning:icon aura:id="titleIconRight" iconName="utility:chevronright" size="xx-small"
+                                        class="slds-hide"/>&nbsp;
+                    </aura:if>
+                    <span class="slds-truncate">{!v.sectionTitle}</span>
+                </button>
+            </h3>
+            
+            <div aura:id="sectionBody" class="slds-section__content" aria-hidden="false">
+                <form role="form" class="slds-form--stacked slds-grid slds-wrap slds-grid--pull-padded ">
+                    <aura:iteration items="{!v.sectionFields}" var="field">
+                        <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                            <div class="slds-form-element slds-has-divider--bottom slds-m-around--x-small">
+                                <span class="slds-form-element__label">{!field.fieldLabel}</span>
+                                <div class="slds-form-element__control">
+                                    <c:outputField fieldType="{!field.fieldType}"
+                                                        fieldValue="{!field.fieldValue}"
+                                                        styleClass="slds-form-element__static field-value" />
+                                </div>
+                            </div>
+                        </div>
+                    </aura:iteration>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</aura:component>

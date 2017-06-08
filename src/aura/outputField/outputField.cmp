@@ -1,0 +1,22 @@
+<!--
+  - Copyright (c) 2016 Financial Spectra
+  - All rights reserved.
+  - 
+  - Component Name - outputField
+  -
+  - Developer(s)   - SSingh
+  -
+  -->
+<aura:component access="global">
+
+    <aura:attribute access="global" name="fieldType" type="String" required="true" default="STRING" 
+                    description="Data type of the field which is the string value of Schema.DisplayType"/>
+    <aura:attribute access="global" name="fieldValue" type="Object" required="true"
+                    description="Value of the field"/>
+    <aura:attribute access="global" name="styleClass" type="String" required="false"
+                    description="CSS style class for the field"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    {!v.body}
+
+</aura:component>

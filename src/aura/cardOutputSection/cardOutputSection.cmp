@@ -1,0 +1,56 @@
+<!--
+  - Copyright (c) 2016 Financial Spectra
+  - All rights reserved.
+  - 
+  - Component Name - cardOutputSection
+  -
+  - Developer(s)   - SSingh
+  -
+  -->
+<aura:component access="global">
+    <aura:attribute access="global" name="sectionTitle" type="String" required="false"
+                    description="User-defined title for the section"/>
+    <aura:attribute access="global" name="sectionFields" type="SectionField[]" required="false"
+                    description="List of fields to be displayed in the card"/>
+    <aura:attribute access="global" name="sectionIcon" type="String" required="false"
+                    description="Icon to be displayed if the section is displayed as a Card"/>
+    <aura:attribute access="global" name="collapsible" type="Boolean" required="false" default="false"
+                    description="Whether the section is collapsible or not"/>
+    <aura:attribute access="global" name="hiddenByDefault" type="Boolean" required="false" default="false"
+                    description="Whether the section is hidden by default (on load) or not"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <lightning:card iconName="{!v.sectionIcon}"> 
+        <aura:set attribute="title">
+            {!v.sectionTitle}
+        </aura:set>
+        <aura:set attribute="actions">
+            <aura:if isTrue="{!v.collapsible}">
+                <a href="javascript:void(0);" onclick="{!c.toggleDisplay}">
+                    <span aura:id="hideLink" class="slds-text-body--small" title="{!$Label.c.Hide_Link}">{!$Label.c.Hide_Link}</span>
+                    <span aura:id="showLink" class="slds-text-body--small slds-hide" title="{!$Label.c.Show_Link}">{!$Label.c.Show_Link}</span>
+                </a>
+            </aura:if>
+        </aura:set>
+        <aura:set attribute="body">
+            <div aura:id="sectionBody">
+                <ul class="slds-card__body_inner slds-grid slds-wrap">
+                    <aura:iteration items="{!v.sectionFields}" var="field">
+                        <div class="slds-p-horizontal_medium slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3">
+                            <dl class="slds-list_stacked slds-wrap slds-p-bottom_x-small">
+                                <dt class="slds-item_label slds-text-color_weak slds-text-body_small slds-truncate"
+                                    title="{!field.fieldLabel}">{!field.fieldLabel}</dt>
+                                <dd class="slds-item_detail slds-text-body_regular">
+                                    <c:outputField fieldType="{!field.fieldType}"
+                                                        fieldValue="{!field.fieldValue}"/>
+                                </dd>
+                            </dl>
+                        </div>
+                    </aura:iteration>
+                </ul>
+            </div>
+        </aura:set>
+    </lightning:card>
+    
+</aura:component>
