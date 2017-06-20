@@ -1,7 +1,7 @@
 # 1. Field Set Output Section
 This component can be used on lightning record page and displays the fields from a field set of the object. You need to set the Field Set Name (API Name - case sensitive) when adding the component to the page and set the other parameters to style the display.
 
-# How to use Field Set Output Section
+*How to use Field Set Output Section*
 Follow the under mentioned steps to use the Field Set Output Section component on your lightning record page
 * Deploy the source code of this repository to your Force.com project.
 * After successful deployment, go to the lightning record page where you want to add the field set section.
