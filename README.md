@@ -11,6 +11,6 @@ Follow the under mentioned steps to use the Field Set Output Section component o
 * Set the Field Set Name (API Name of the field set with namespace-prefix)
 * Set the other optional properties like Section Name, Section Style, Icon and Collapsible as per your requirement.
 
-If this component is useful for you, please leave a comment. If you have any suggestions or find any issue, then also please leave a comment.
+If this component is useful for you, please leave a comment. If you have any suggestions or find any issue, then also please log an issue.
 
 Cheers!
