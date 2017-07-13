@@ -25,6 +25,8 @@
                     description="Data type of the field which is the string value of Schema.DisplayType"/>
     <aura:attribute access="global" name="fieldValue" type="Object" required="true"
                     description="Value of the field"/>
+    <aura:attribute access="global" name="fieldLabel" type="String" required="false"
+                    description="Label for URL or Reference fields"/>
     <aura:attribute access="global" name="styleClass" type="String" required="false"
                     description="CSS style class for the field"/>
 
