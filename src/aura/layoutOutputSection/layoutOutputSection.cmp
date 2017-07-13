@@ -26,6 +26,8 @@
                     description="List of fields to be displayed in the card"/>
     <aura:attribute access="global" name="collapsible" type="Boolean" required="false" default="false"
                     description="Whether the section is collapsible or not"/>
+    <aura:attribute access="global" name="columnClass" type="String" required="false" default="slds-large-size_1-of-2"
+                    description="SLDS class that determines how many columns to displayed in one row"/>
 
     <div class="slds-container--fluid">
         <div class="slds-section slds-is-open">
@@ -46,13 +48,14 @@
             <div aura:id="sectionBody" class="slds-section__content" aria-hidden="false">
                 <form role="form" class="slds-form--stacked slds-grid slds-wrap slds-grid--pull-padded ">
                     <aura:iteration items="{!v.sectionFields}" var="field">
-                        <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <div class="{! 'slds-p-horizontal_small slds-small-size_1-of-1 slds-medium-size_1-of-2 ' + v.columnClass}" >
                             <div class="slds-form-element slds-has-divider--bottom slds-m-around--x-small">
                                 <span class="slds-form-element__label">{!field.fieldLabel}</span>
                                 <div class="slds-form-element__control">
                                     <c:outputField fieldType="{!field.fieldType}"
-                                                        fieldValue="{!field.fieldValue}"
-                                                        styleClass="slds-form-element__static field-value" />
+                                                   fieldValue="{!field.fieldValue}"
+                                                   fieldLabel="{!field.fieldDisplayValue}"
+                                                   styleClass="slds-form-element__static field-value" />
                                 </div>
                             </div>
                         </div>
