@@ -28,7 +28,7 @@
         if (uiComponentType == "ui:outputURL"){
             helper.createURLField(component, event);
         }
-        else if (uiComponentType == "fsLtng:referenceField"){
+        else if (uiComponentType == "c:referenceField"){
             helper.createReferenceField(component, event);
         }
         else {
