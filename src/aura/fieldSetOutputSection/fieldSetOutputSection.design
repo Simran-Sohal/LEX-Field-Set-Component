@@ -6,6 +6,8 @@
                       description="Custom title for the section. By default, it uses the name of the Field Set as the title."/>
     <design:attribute name="sectionType" label="Section Type" dataSource="Card,Layout" default="Card"
                       description="Determines the style of the Section. Possible values are Card (like a related list) or Layout (like a page layout section)."/>
+    <design:attribute name="columnsPerRow" label="Columns per row" dataSource="1,2,3,4" default="2"
+                      description="Determines the number of columns to be displayed in each row. Applicable only for large-size data grid."/>
     <design:attribute name="sectionIcon" label="Section Icon"
                       description="Determines which Lightning Design System Icon to be displayed for the section. Icon Names are written in the format 'standard:apps' where 'standard' is the category, and 'apps' is the specific icon to be displayed. Only applicable if section is displayed as a Card."/>
     <design:attribute name="collapsible" label="Collapsible" default="false"
