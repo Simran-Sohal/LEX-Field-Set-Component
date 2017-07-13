@@ -21,7 +21,7 @@
  **/
 ({
     doInit : function(component, event, helper) {
-		//get the appropriate ui component for the field type
+	//get the appropriate ui component for the field type
         var uiComponentType = helper.getUIComponentType(component.get("v.type"));
         //console.log("Component Type : " + uiComponentType);
         
