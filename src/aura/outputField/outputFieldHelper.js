@@ -23,7 +23,7 @@
     getUIComponentType : function(fieldType) {
         var uiComponentType = "ui:outputText";
         
-        if (fieldType == "BOOLEAN" || fieldType == ""){
+        if (fieldType == "BOOLEAN"){
             uiComponentType = "ui:outputCheckbox";
         } 
         else if (fieldType == "CURRENCY"){
