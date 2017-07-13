@@ -66,7 +66,7 @@
         return uiComponentType;
     },
     
-    createField : function(component, event, uiComponentType){
+    createField : function(component, event, helper, uiComponentType){
         $A.createComponent(
             uiComponentType,
             {
@@ -87,7 +87,7 @@
         );
     },
 
-    createURLField : function(component, event){
+    createURLField : function(component, event, helper){
         var urlLabel = component.get("v.label");
         if (urlLabel == null || urlLabel == undefined || urlLabel == ""){
             urlLabel = component.get("v.value");
@@ -114,7 +114,7 @@
         );
     },
 
-    createReferenceField : function(component, event){
+    createReferenceField : function(component, event, helper){
         var fieldLabel = component.get("v.label");
         if (fieldLabel == null || fieldLabel == undefined || fieldLabel == ""){
             fieldLabel = component.get("v.value");
