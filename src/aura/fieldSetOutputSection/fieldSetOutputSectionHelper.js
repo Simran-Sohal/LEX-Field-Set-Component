@@ -53,7 +53,8 @@
                 "sectionFields" : sectionFields,
                 "sectionIcon" : component.get("v.sectionIcon"),
                 "collapsible" : component.get("v.collapsible"),
-                "hiddenByDefault" : component.get("v.hiddenByDefault")
+                "hiddenByDefault" : component.get("v.hiddenByDefault"),
+                "columnClass" : helper.getColumnClass(component.get("v.columnsPerRow"))
             },
             function(sectionBody, status, errorMessage){
                 if (status === "SUCCESS") {
@@ -73,7 +74,8 @@
             "c:layoutOutputSection",{
                 "sectionTitle" : component.get("v.sectionTitle"),
                 "sectionFields" : sectionFields,
-                "collapsible" : component.get("v.collapsible")
+                "collapsible" : component.get("v.collapsible"),
+                "columnClass" : helper.getColumnClass(component.get("v.columnsPerRow"))
             },
             function(sectionBody, status, errorMessage){
                 if (status === "SUCCESS") {
@@ -87,6 +89,21 @@
                 }
             }
         );        
+    },
+    getColumnClass : function(numberOfColumns){
+        var columnClass = "slds-large-size_1-of-2"; //default 2 fields per row
+        
+        if (numberOfColumns == "1"){
+            columnClass = "slds-large-size_1-of-1";
+        } else if (numberOfColumns == "2"){
+            columnClass = "slds-large-size_1-of-2";
+        } else if (numberOfColumns == "3"){
+            columnClass = "slds-large-size_1-of-3";
+        } else if (numberOfColumns == "4"){
+            columnClass = "slds-large-size_1-of-4";
+        }
+        
+        return columnClass;
     }
     
 })
