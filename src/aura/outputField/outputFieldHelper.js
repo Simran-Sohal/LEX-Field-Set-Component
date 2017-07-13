@@ -75,9 +75,7 @@
             },
             function(uiComponent, status, errorMessage){
                 if (status === "SUCCESS") {
-                    var componentBody = component.get("v.body");
-                    componentBody.push(uiComponent);
-                    component.set("v.body", componentBody);
+                    helper.setFieldBody(component, uiComponent);
                 }
                 else if (status === "INCOMPLETE") {
                     console.log("No response from server or client is offline.")
@@ -104,9 +102,7 @@
             },
             function(urlField, status, errorMessage){
                 if (status === "SUCCESS") {
-                    var componentBody = component.get("v.body");
-                    componentBody.push(urlField);
-                    component.set("v.body", componentBody);
+                    helper.setFieldBody(component, urlField);
                 }
                 else if (status === "INCOMPLETE") {
                     console.log("No response from server or client is offline.")
@@ -133,9 +129,7 @@
             },
             function(refField, status, errorMessage){
                 if (status === "SUCCESS") {
-                    var componentBody = component.get("v.body");
-                    componentBody.push(refField);
-                    component.set("v.body", componentBody);
+                    helper.setFieldBody(component, refField);
                 }
                 else if (status === "INCOMPLETE") {
                     console.log("No response from server or client is offline.")
@@ -145,6 +139,11 @@
                 }
             }
         );
+    },
+    
+    setFieldBody : function(component, createdField){
+        var componentBody = component.get("v.body");
+        componentBody.push(createdField);
+        component.set("v.body", componentBody);
     }
-
 })
