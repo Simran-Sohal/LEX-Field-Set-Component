@@ -14,3 +14,9 @@ Follow the under mentioned steps to use the Field Set Output Section component o
 If this component is useful for you, please leave a comment. If you have any suggestions or find any issue, then also please log an issue.
 
 Cheers!
+
+
+This component has been released via AppExchange
+https://appexchange.salesforce.com/listingDetail?listingId=a0N3A00000ErEqoUAF
+
+The AppExchange release also includes another component - Related Record Table
