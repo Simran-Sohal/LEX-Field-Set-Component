@@ -35,36 +35,63 @@ global with sharing class FieldSetSectionController {
         Schema.FieldSet fieldSet = fieldSetMap.get(pFieldSetName);
         String sObjectName = sObjectType.getDescribe().getName();
         String queryFieldString = '';
+        
         for(Schema.FieldSetMember fsMember : fieldSet.getFields()){
-            if (fsMember.getFieldPath().equalsIgnoreCase('Id')
-                    || fsMember.getFieldPath().equalsIgnoreCase('Name'))
+            Schema.DescribeFieldResult fieldDesc = fieldMap.get(fsMember.getFieldPath()).getDescribe();
+            //skip if field is not accessible
+            if (!fieldDesc.isAccessible())
                 continue;
 
-            //add field to the query string only if it is accessible to user
-            if (fieldMap.get(fsMember.getFieldPath()).getDescribe().isAccessible()){
-                queryFieldString += fsMember.getFieldPath() + ', ';
+            //skip if Id or Name field
+            if (fieldDesc.getName().equalsIgnoreCase('Id')
+                    || fieldDesc.getName().equalsIgnoreCase('Name'))
+                continue;
+
+            //add field to the query string
+            if (fieldDesc.getType() == Schema.DisplayType.Picklist){
+                queryFieldString += 'toLabel(' + fieldDesc.getName() + '), ';
+            }
+            else {
+                queryFieldString += fieldDesc.getName() + ', ';
+            }
+            
+            if (fieldDesc.getType() == Schema.DisplayType.Reference){
+                queryFieldString += fieldDesc.getRelationshipName() + '.Id, ';
+                queryFieldString += fieldDesc.getRelationshipName() + '.Name, ';
             }
         }
         queryFieldString += 'Id, Name ';
         
+        //prepare SOQL
         String recordSOQL = 'SELECT ' + queryFieldString + ' FROM ' + sObjectName + ' WHERE Id = :pRecordId';
-        System.debug(loggingLevel.DEBUG, 'Record Query : ' + recordSOQL);
-
+        
+        //execute SOQL
         SObject sObjRecord = Database.query(recordSOQL);
-        System.debug(loggingLevel.DEBUG, 'Record : ' + sObjRecord);
         
         SectionField[] sectionFields = new SectionField[]{};
         
         for(Schema.FieldSetMember fsMember : fieldSet.getFields()){
+            Schema.DescribeFieldResult fieldDesc = fieldMap.get(fsMember.getFieldPath()).getDescribe();
+
             //add field to the section field list only if it is accessible to user
-            if (fieldMap.get(fsMember.getFieldPath()).getDescribe().isAccessible()){
+            if (fieldDesc.isAccessible()){
                 SectionField field = new SectionField();
-                field.fieldName  = fsMember.getFieldPath();
-                field.fieldLabel = fsMember.getLabel();
-                field.fieldType  = String.valueOf(fsMember.getType());
-                field.fieldValue = sObjRecord.get(fsMember.getFieldPath());
+                field.fieldName  = fieldDesc.getName();
+                field.fieldLabel = fieldDesc.getLabel();
                 field.isRequired = (fsMember.getDBRequired() || fsMember.getRequired());
+                field.fieldValue = sObjRecord.get(fieldDesc.getName());
+                field.fieldType  = String.valueOf(fieldDesc.getType());
+                field.fieldHelpText = fieldDesc.getInlineHelpText();
                 sectionFields.add(field);
+                
+                //set display value for Reference field
+                if (fieldDesc.getType() == Schema.DisplayType.Reference && field.fieldValue != null){
+                    SObject refRecord = sObjRecord.getSObject(fieldDesc.getRelationshipName());
+                    field.fieldDisplayValue = String.valueOf(refRecord.get('Name'));
+                }
+                else {
+                    field.fieldDisplayValue = String.valueOf(field.fieldValue);
+                }
             }
         }
         
