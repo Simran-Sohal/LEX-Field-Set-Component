@@ -17,6 +17,7 @@ Cheers!
 
 
 This component has been released via AppExchange
+
 https://appexchange.salesforce.com/listingDetail?listingId=a0N3A00000ErEqoUAF
 
-The AppExchange release also includes another component - Related Record Table
+The AppExchange release also includes another component - Related Record Table. For latest version of the package please contact support@financialspectra.com.
