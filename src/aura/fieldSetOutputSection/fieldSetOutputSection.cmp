@@ -34,6 +34,8 @@
                     description="Whether the section is collapsible or not"/>
     <aura:attribute access="global" name="hiddenByDefault" type="Boolean" required="false" default="false"
                     description="Whether the section is hidden by default or not"/>
+    <aura:attribute access="global" name="columnsPerRow" type="String" required="false" default="2"
+                    description="Determines how many columns to displayed in one row"/>
     
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
