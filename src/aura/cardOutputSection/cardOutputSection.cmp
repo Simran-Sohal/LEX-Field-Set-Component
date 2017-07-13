@@ -30,6 +30,8 @@
                     description="Whether the section is collapsible or not"/>
     <aura:attribute access="global" name="hiddenByDefault" type="Boolean" required="false" default="false"
                     description="Whether the section is hidden by default (on load) or not"/>
+    <aura:attribute access="global" name="columnClass" type="String" required="false" default="slds-large-size_1-of-2"
+                    description="SLDS class that determines how many columns to displayed in one row"/>
     
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     
@@ -49,13 +51,14 @@
             <div aura:id="sectionBody">
                 <ul class="slds-card__body_inner slds-grid slds-wrap">
                     <aura:iteration items="{!v.sectionFields}" var="field">
-                        <div class="slds-p-horizontal_medium slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3">
+                        <div class="{! 'slds-p-horizontal_medium slds-small-size_1-of-1 slds-medium-size_1-of-2 ' + v.columnClass}">
                             <dl class="slds-list_stacked slds-wrap slds-p-bottom_x-small">
                                 <dt class="slds-item_label slds-text-color_weak slds-text-body_small slds-truncate"
                                     title="{!field.fieldLabel}">{!field.fieldLabel}</dt>
                                 <dd class="slds-item_detail slds-text-body_regular">
                                     <c:outputField fieldType="{!field.fieldType}"
-                                                        fieldValue="{!field.fieldValue}"/>
+                                                   fieldValue="{!field.fieldValue}"
+                                                   fieldLabel="{!field.fieldDisplayValue}"/>
                                 </dd>
                             </dl>
                         </div>
