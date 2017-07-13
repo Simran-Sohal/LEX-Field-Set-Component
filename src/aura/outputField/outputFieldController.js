@@ -26,13 +26,13 @@
         //console.log("Component Type : " + uiComponentType);
         
         if (uiComponentType == "ui:outputURL"){
-            helper.createURLField(component, event);
+            helper.createURLField(component, event, helper);
         }
         else if (uiComponentType == "c:referenceField"){
-            helper.createReferenceField(component, event);
+            helper.createReferenceField(component, event, helper);
         }
         else {
-            helper.createField(component, event, uiComponentType);
+            helper.createField(component, event, helper, uiComponentType);
         }
     }
 
