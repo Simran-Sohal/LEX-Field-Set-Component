@@ -20,31 +20,20 @@
  * SOFTWARE.
  **/
 ({
-	doInit : function(component, event, helper) {
+    doInit : function(component, event, helper) {
 		//get the appropriate ui component for the field type
-        var uiComponentType = helper.getUIComponentType(component.get("v.fieldType"));
+        var uiComponentType = helper.getUIComponentType(component.get("v.type"));
         //console.log("Component Type : " + uiComponentType);
         
-        //create the component dynamically
-        $A.createComponent(
-            uiComponentType,
-            {
-                "value": component.get("v.fieldValue"),
-                "class": component.get("v.styleClass")
-            },
-            function(uiComponent, status, errorMessage){
-                if (status === "SUCCESS") {
-                    var componentBody = component.get("v.body");
-                    componentBody.push(uiComponent);
-                    component.set("v.body", componentBody);
-                }
-                else if (status === "INCOMPLETE") {
-                    console.log("No response from server or client is offline.")
-                }
-                else if (status === "ERROR") {
-                    console.log("Error: " + errorMessage);
-                }
-            }
-        );
-	}
+        if (uiComponentType == "ui:outputURL"){
+            helper.createURLField(component, event);
+        }
+        else if (uiComponentType == "fsLtng:referenceField"){
+            helper.createReferenceField(component, event);
+        }
+        else {
+            helper.createField(component, event, uiComponentType);
+        }
+    }
+
 })
