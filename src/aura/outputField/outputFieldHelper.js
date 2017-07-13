@@ -20,7 +20,7 @@
  * SOFTWARE.
  **/
 ({
-	getUIComponentType : function(fieldType) {
+    getUIComponentType : function(fieldType) {
         var uiComponentType = "ui:outputText";
         
         if (fieldType == "BOOLEAN" || fieldType == ""){
@@ -64,7 +64,7 @@
         }
         
         return uiComponentType;
-	},
+    },
     
     createField : function(component, event, uiComponentType){
         $A.createComponent(
