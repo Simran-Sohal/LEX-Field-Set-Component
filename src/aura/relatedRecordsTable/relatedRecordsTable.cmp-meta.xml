@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <AuraDefinitionBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>40.0</apiVersion>
-    <description>Lightning Component to display the reference field on the layout.</description>
+    <description>Lightning component to display the list of records in a table format from a Related object.</description>
 </AuraDefinitionBundle>

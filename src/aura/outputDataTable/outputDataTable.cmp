@@ -1,0 +1,39 @@
+<!--
+  - Copyright (c) 2016 Financial Spectra
+  - All rights reserved.
+  - 
+  - Component Name - outputDataTable
+  -
+  - Developer(s)   - SSingh
+  -
+  -->
+<aura:component access="global">
+    <aura:attribute access="global" name="columns" type="Field[]" description="List of columns for the table header"/>
+    <aura:attribute access="global" name="rows" type="Row[]" description="List of records for table data rows"/>
+    <aura:attribute access="global" name="tableClass" type="String" description="CSS style class for the table"/>
+    <aura:attribute access="global" name="headerRowClass" type="String" description="CSS style class for the header row"/>
+    <aura:attribute access="global" name="headerColumnClass" type="String" description="CSS style class for the header column"/>
+    <aura:attribute access="global" name="dataRowClass" type="String" description="CSS style class for the data row"/>
+    <aura:attribute access="global" name="dataColumnClass" type="String" description="CSS style class for the data column"/>
+    <aura:attribute access="global" name="maxRowsDisplayed" type="Integer" description="Maximum number of rows that should be to be displayed"/>
+
+    <aura:attribute access="private" name="dataRows" type="Aura.Component[]" description="Placeholder for data table rows"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <table class="{! 'slds-table slds-table_bordered slds-table_cell-buffer slds-max-medium-table--stacked ' + v.tableClass}">
+        <thead>
+            <tr class="{! 'slds-text-title_caps ' + v.headerRowClass}">
+                <aura:iteration items="{!v.columns}" var="column">
+                    <th data-column-name="{!column.fieldName}" scope="col" class="{! 'slds-cell-wrap ' + v.headerColumnClass}">
+                        <div class="slds-truncate" title="{!column.fieldLabel}">{!column.fieldLabel}</div>
+                    </th>
+                </aura:iteration>
+            </tr>
+        </thead>
+        <tbody>
+            {!v.dataRows}
+        </tbody>
+    </table>
+
+</aura:component>

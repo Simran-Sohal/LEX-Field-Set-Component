@@ -1,0 +1,31 @@
+<!--
+  - Copyright (c) 2016 Financial Spectra
+  - All rights reserved.
+  - 
+  - Component Name - outputDataRow
+  -
+  - Developer(s)   - SSingh
+  -
+  -->
+<aura:component access="global">
+    <aura:attribute access="global" name="fields" type="Field[]" description="List of fields for the data row"/>
+    <aura:attribute access="global" name="rowClass" type="String" description="CSS style class for the data row"/>
+    <aura:attribute access="global" name="columnClass" type="String" description="CSS style class for the data column"/>
+    
+	<tr class="{!v.rowClass}">
+		<aura:iteration items="{!v.fields}" var="field">
+            <td data-column-name="{!field.fieldName}" scope="col" class="{! 'slds-cell-wrap ' + v.columnClass}">
+                <aura:if isTrue="{!field.fieldName == 'Name'}">
+                    <a data-record="{!field.fieldValue}" href="" onclick="{!c.navigateToRecord}">{!field.fieldLabel}</a>
+                    <aura:set attribute="else">
+                        <c:outputField type="{!field.fieldType}"
+                                            value="{!field.fieldValue}"
+                                            label="{!field.fieldDisplayValue}"
+                                            class="slds-truncate"/>
+                    </aura:set>
+                </aura:if>
+            </td>
+		</aura:iteration>
+	</tr>
+    
+</aura:component>

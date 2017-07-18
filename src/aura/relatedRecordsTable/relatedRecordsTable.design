@@ -1,0 +1,22 @@
+<design:component label="Related Records Table">
+
+    <design:attribute name="relatedObjectName" label="Related Object Name"
+                      description="API Name of the Related Object (with namespaceprefix)."/>
+    <design:attribute name="relationshipName" label="Relationship Name"
+                      description="API Name of the Relationship Name (with namespaceprefix) that this object has with the Related Object. Please note : Custom relationship names are the one that ends with __r."/>
+    <design:attribute name="fieldsString" label="List of Fields (comma separated)" default="Name"
+                      description="Comma separated list of field API names (with namespaceprefix) to be displayed in the table."/>
+    <design:attribute name="sortByfields" label="Sort by" default="Name"
+                      description="Comma separated list of field API names (with namespaceprefix) for sorting the result set. By default, table is sorted by the first field in the list of fields."/>
+    <design:attribute name="ascending" label="Ascending" default="true"
+                      description="Determines whether to sort in ascending order (true) or descending order (false)."/>
+    <design:attribute name="tableTitle" label="Table Title"  default="Related Records"
+                      description="User defined title for the record table."/>
+    <design:attribute name="tableIcon" label="Table Icon" default="standard:apps"
+                      description="Determines which Lightning Design System Icon to be displayed for the table. Icon Names are written in the format 'standard:apps' where 'standard' is the category, and 'apps' is the specific icon to be displayed."/>
+    <design:attribute name="maxNumberOfRows" label="Maximum number of rows" default="10"
+                      description="Maximum number of rows that a user sees when the table is loaded."/>
+    <design:attribute name="collapsible" label="Collapsible" default="true"
+                      description="Determines whether the table section is collapsible or not."/>
+
+</design:component>

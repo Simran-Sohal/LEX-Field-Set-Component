@@ -1,0 +1,67 @@
+<!--
+  - Copyright (c) 2016 Financial Spectra
+  - All rights reserved.
+  - 
+  - Component Name - relatedRecordsTable
+  -
+  - Developer(s)   - SSingh
+  -
+  -->
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId"
+                access="global" controller="RelatedRecordsTableController">
+
+    <aura:attribute access="global" name="relatedObjectName" type="String" required="false"
+                    description="API Name of the Related Object"/>
+    <aura:attribute access="global" name="relationshipName" type="String" required="false"
+                    description="API Name of the Relationship Name that this object has with the Related Object"/>
+    <aura:attribute access="global" name="fieldsString" type="String" required="false" default="Name"
+                    description="Comma separated list of field API names to be displayed in the table"/>
+    <aura:attribute access="global" name="sortByfields" type="String" required="false" default="Name"
+                    description="Comma separated list of field API names for sorting the table"/>
+    <aura:attribute access="global" name="ascending" type="Boolean" required="false" default="true"
+                    description="Determines whether to sort in ascending order (if true) or descending order (if false)."/>
+    <aura:attribute access="global" name="tableTitle" type="String" required="false"
+                    description="User defined title for the record table"/>
+    <aura:attribute access="global" name="tableIcon" type="String" required="false"
+                    description="Icon to be displayed for the record table"/>
+    <aura:attribute access="global" name="maxNumberOfRows" type="Integer" required="false" default="10"
+                    description="Maximum number of rows that should be to be displayed when the table is loaded"/>
+    <aura:attribute access="global" name="collapsible" type="Boolean" required="false" default="false"
+                    description="Whether the table section is collapsible or not"/>
+
+    <aura:attribute access="private" name="relatedRecords" type="Aura.Component[]" description="Placeholder for the related records table"/>
+    <aura:attribute access="private" name="dataTable" type="DataTable" description="Placeholder for returned data table" />
+    <aura:attribute access="private" name="totalRows" type="Integer" description="Placeholder for total rows count" />
+    <aura:attribute access="private" name="rowsNotDisplayed" type="Integer" description="Placeholder for number of rows not displayed" />
+    <aura:attribute access="private" name="showMoreRowsText" type="Aura.Component[]" description="Placeholder for show more rows link label" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    
+    <lightning:spinner aura:id="spinner" variant="brand" size="medium"/>
+
+    <lightning:card iconName="{!v.tableIcon}"> 
+        <aura:set attribute="title">
+            {!v.tableTitle}
+        </aura:set>
+        <aura:set attribute="actions">
+            <aura:if isTrue="{!v.collapsible}">
+                <a aura:id="tableShowHideAction" onclick="{!c.toggleDisplay}" class="slds-hide">
+                    <span aura:id="hideLink" class="slds-text-body--small" title="{!$Label.c.Hide_Records_Label}">{!$Label.c.Hide_Records_Label}</span>
+                    <span aura:id="showLink" class="slds-text-body--small slds-hide" title="{!$Label.c.Show_Records_Label}">{!$Label.c.Show_Records_Label}</span>
+                </a>
+            </aura:if>
+        </aura:set>
+        <aura:set attribute="body">
+            <div aura:id="tableBody" class="slds-m-horizontal--small">
+                {!v.relatedRecords}
+            </div>
+        </aura:set>
+        <aura:set attribute="footer">
+            <div aura:id="tablefooter">
+                <a aura:id="showMoreRowsLink" onclick="{!c.addRows}">{!v.showMoreRowsText}</a>
+            </div>
+        </aura:set>
+    </lightning:card>
+
+</aura:component>

@@ -1,29 +1,19 @@
-/** 
- * Copyright (c) 2017 Simranjeet Singh
+/*
+ * Copyright (c) 2016 Financial Spectra
+ * All rights reserved.
  * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- **/
+ * Class Name   - FieldSetSectionController
+ *
+ * Description  - Apex Controller for Field Set Output Section 
+ *                Lightning component
+ *
+ * Developer(s) - SSingh
+ */
 global with sharing class FieldSetSectionController {
     
     @AuraEnabled
-    global static SectionField[] getOutputFields(Id pRecordId
-                                               , String pFieldSetName){
+    global static Field[] getOutputFields(Id pRecordId
+                                        , String pFieldSetName){
         Schema.SObjectType sObjectType = pRecordId.getSobjectType();
         Map<String, Schema.FieldSet> fieldSetMap = sObjectType.getDescribe().fieldSets.getMap();
         Map<String, Schema.SObjectField> fieldMap = sObjectType.getDescribe().fields.getMap();
@@ -35,7 +25,6 @@ global with sharing class FieldSetSectionController {
         Schema.FieldSet fieldSet = fieldSetMap.get(pFieldSetName);
         String sObjectName = sObjectType.getDescribe().getName();
         String queryFieldString = '';
-        
         for(Schema.FieldSetMember fsMember : fieldSet.getFields()){
             Schema.DescribeFieldResult fieldDesc = fieldMap.get(fsMember.getFieldPath()).getDescribe();
             //skip if field is not accessible
@@ -68,14 +57,14 @@ global with sharing class FieldSetSectionController {
         //execute SOQL
         SObject sObjRecord = Database.query(recordSOQL);
         
-        SectionField[] sectionFields = new SectionField[]{};
-        
+        //populate fields details
+        Field[] sectionFields = new Field[]{};
         for(Schema.FieldSetMember fsMember : fieldSet.getFields()){
             Schema.DescribeFieldResult fieldDesc = fieldMap.get(fsMember.getFieldPath()).getDescribe();
 
             //add field to the section field list only if it is accessible to user
             if (fieldDesc.isAccessible()){
-                SectionField field = new SectionField();
+                Field field = new Field();
                 field.fieldName  = fieldDesc.getName();
                 field.fieldLabel = fieldDesc.getLabel();
                 field.isRequired = (fsMember.getDBRequired() || fsMember.getRequired());
@@ -94,8 +83,8 @@ global with sharing class FieldSetSectionController {
                 }
             }
         }
-        
+
         return sectionFields;
     }
-
+    
 }

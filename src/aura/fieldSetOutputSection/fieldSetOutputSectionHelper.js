@@ -1,27 +1,15 @@
-/** 
- * Copyright (c) 2017 Simranjeet Singh
+/*
+ * Copyright (c) 2016 Financial Spectra
+ * All rights reserved.
  * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- **/
+ * File Name    - fieldSetOutputSectionHelper.js
+ *
+ * Developer(s) - SSingh
+ *
+ */
 ({
-    setSectionBody : function(component, event, helper) {
-	var action = component.get("c.getOutputFields");
+	setSectionBody : function(component, event, helper) {
+		var action = component.get("c.getOutputFields");
         action.setParams({
             "pRecordId": component.get("v.recordId"),
             "pFieldSetName": component.get("v.fieldSetName")
@@ -36,24 +24,23 @@
             }
         });
         $A.enqueueAction(action);
-    },
+	},
     createSectionBody : function(component, helper, sectionFields){
         var sectionType = component.get("v.sectionType");
         if (sectionType == "Card"){
-            helper.createCardSection(component, sectionFields);
+            helper.createCardSection(component, helper, sectionFields);
         }
         else {
-            helper.createLayoutSection(component, sectionFields);
+            helper.createLayoutSection(component, helper, sectionFields);
         }
     },
-    createCardSection : function(component, sectionFields) {
+    createCardSection : function(component, helper, sectionFields) {
         $A.createComponent(
             "c:cardOutputSection",{
                 "sectionTitle" : component.get("v.sectionTitle"),
                 "sectionFields" : sectionFields,
                 "sectionIcon" : component.get("v.sectionIcon"),
                 "collapsible" : component.get("v.collapsible"),
-                "hiddenByDefault" : component.get("v.hiddenByDefault"),
                 "columnClass" : helper.getColumnClass(component.get("v.columnsPerRow"))
             },
             function(sectionBody, status, errorMessage){
@@ -68,8 +55,8 @@
                 }
             }
         );        
-    },
-    createLayoutSection : function(component, sectionFields) {
+	},
+    createLayoutSection : function(component, helper, sectionFields) {
         $A.createComponent(
             "c:layoutOutputSection",{
                 "sectionTitle" : component.get("v.sectionTitle"),
@@ -89,7 +76,7 @@
                 }
             }
         );        
-    },
+	},
     getColumnClass : function(numberOfColumns){
         var columnClass = "slds-large-size_1-of-2"; //default 2 fields per row
         
