@@ -10,7 +10,7 @@
  * Developer(s) - SSingh
  *
  * Modification(s)
- * - 10-Jul-2017        Added attribute fieldDisplayValue
+ *   10-Jul-2017        Added attribute fieldDisplayValue
  *   This attribute is populated for reference fields and 
  *   keeps the name of the record whose Id is stored in the
  *   reference or lookup field
