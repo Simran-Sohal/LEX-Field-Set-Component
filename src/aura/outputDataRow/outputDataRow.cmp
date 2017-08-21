@@ -8,6 +8,8 @@
   -
   -->
 <aura:component access="global">
+    <aura:dependency resource="c:outputField"/>
+
     <aura:attribute access="global" name="fields" type="Field[]" description="List of fields for the data row"/>
     <aura:attribute access="global" name="rowClass" type="String" description="CSS style class for the data row"/>
     <aura:attribute access="global" name="columnClass" type="String" description="CSS style class for the data column"/>
