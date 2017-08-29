@@ -38,6 +38,3 @@ This component has been released via AppExchange
 https://appexchange.salesforce.com/listingDetail?listingId=a0N3A00000ErEqoUAF
 
 The AppExchange release also includes another component - Related Record Table. 
-
-Here is the link of the latest version of the managed package 
-https://login.salesforce.com/packaging/installPackage.apexp?p0=04t6A000001KtRb
