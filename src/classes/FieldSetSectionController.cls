@@ -32,8 +32,7 @@ global with sharing class FieldSetSectionController {
                 continue;
 
             //skip if Id or Name field
-            if (fieldDesc.getName().equalsIgnoreCase('Id')
-                    || fieldDesc.getName().equalsIgnoreCase('Name'))
+            if (fieldDesc.getName().equalsIgnoreCase('Id'))
                 continue;
 
             //add field to the query string
@@ -49,7 +48,7 @@ global with sharing class FieldSetSectionController {
                 queryFieldString += fieldDesc.getRelationshipName() + '.Name, ';
             }
         }
-        queryFieldString += 'Id, Name ';
+        queryFieldString += 'Id';
         
         //prepare SOQL
         String recordSOQL = 'SELECT ' + queryFieldString + ' FROM ' + sObjectName + ' WHERE Id = :pRecordId';
