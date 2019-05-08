@@ -76,6 +76,8 @@ global with sharing class FieldSetSectionController {
                 if (fieldDesc.getType() == Schema.DisplayType.Reference && field.fieldValue != null){
                     SObject refRecord = sObjRecord.getSObject(fieldDesc.getRelationshipName());
                     field.fieldDisplayValue = String.valueOf(refRecord.get('Name'));
+                    // Select the ID of the refenced object, not the value in the field
+                    field.fieldValue = refRecord.get('Id');
                 }
                 else {
                     field.fieldDisplayValue = String.valueOf(field.fieldValue);
